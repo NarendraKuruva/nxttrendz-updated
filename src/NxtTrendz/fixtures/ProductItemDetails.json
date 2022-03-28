@@ -1,0 +1,46 @@
+{
+   "id": "24",
+   "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/appliances-washing-machine.png",
+   "title": "Front Load Machine",
+   "price": "22490",
+   "description": "Samsung Front Load washing machine comes with AI-enabled Intelligent Wash. It personalizes washing by remembering your habits, suggesting cycles, and displaying timely information. A SmartThings App provides advice on washing cycles, planning, and troubleshooting.   ",
+   "brand": "Samsung",
+   "total_reviews": "1234",
+   "rating": "4",
+   "availability": "In Stock",
+   "similar_products": [
+      {
+         "id": "24",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/appliances-washing-machine.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "description": "Samsung Front Load washing machine comes with AI-enabled Intelligent Wash. It personalizes washing by remembering your habits, suggesting cycles, and displaying timely information. A SmartThings App provides advice on washing cycles, planning, and troubleshooting.   ",
+         "brand": "Samsung",
+         "total_reviews": "1234",
+         "rating": "4",
+         "availability": "In Stock"
+      },
+      {
+         "id": "25",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/appliances-washing-machine.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "description": "Samsung Front Load washing machine comes with AI-enabled Intelligent Wash. It personalizes washing by remembering your habits, suggesting cycles, and displaying timely information. A SmartThings App provides advice on washing cycles, planning, and troubleshooting.   ",
+         "brand": "Samsung",
+         "total_reviews": "1234",
+         "rating": "4",
+         "availability": "In Stock"
+      },
+      {
+         "id": "26",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/appliances-washing-machine.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "description": "Samsung Front Load washing machine comes with AI-enabled Intelligent Wash. It personalizes washing by remembering your habits, suggesting cycles, and displaying timely information. A SmartThings App provides advice on washing cycles, planning, and troubleshooting.   ",
+         "brand": "Samsung",
+         "total_reviews": "1234",
+         "rating": "4",
+         "availability": "In Stock"
+      }
+   ]
+}

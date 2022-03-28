@@ -1,0 +1,52 @@
+{
+   "data": [
+      {
+         "id": "24",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/appliances-washing-machine.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "brand": "Samsung",
+         "rating": "4"
+      },
+      {
+         "id": "25",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/electronics-copper-kettle.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "brand": "Samsung",
+         "rating": "4"
+      },
+      {
+         "id": "26",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/grocery-lemons.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "brand": "Samsung",
+         "rating": "4"
+      },
+      {
+         "id": "27",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/appliances-washing-machine.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "brand": "Samsung",
+         "rating": "4"
+      },
+      {
+         "id": "28",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/appliances-ear-buds.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "brand": "Samsung",
+         "rating": "4"
+      },
+      {
+         "id": "29",
+         "image_url": "https://assets.ccbp.in/frontend/react-js/ecommerce/grocery-sugar-cubes.png",
+         "title": "Front Load Machine",
+         "price": "22490",
+         "brand": "Samsung",
+         "rating": "4"
+      }
+   ]
+}
