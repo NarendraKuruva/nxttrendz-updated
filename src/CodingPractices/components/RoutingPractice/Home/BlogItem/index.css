@@ -1,0 +1,9 @@
+.item-heading-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.blog-item {
+   margin-bottom: 5px;
+   padding: 8px;
+}

@@ -1,0 +1,33 @@
+.blog-container {
+   width: 500px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 15px;
+}
+.author-container {
+   display: flex;
+   align-items: center;
+   align-self: flex-start;
+}
+.avatar {
+   align-self: center;
+   width: 30px;
+   border-radius: 30px;
+   height: 30px;
+   margin-right: 8px;
+}
+.heading {
+   font-weight: bold;
+   font-size: 28px;
+}
+.main-container {
+   border: 2px solid;
+   margin-top: 15px;
+}
+.container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}

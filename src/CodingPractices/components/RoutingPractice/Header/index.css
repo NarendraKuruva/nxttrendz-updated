@@ -1,0 +1,17 @@
+/* Write your CSS code here */
+.header-container {
+   display: flex;
+   padding: 10px;
+   justify-content: space-between;
+   align-items: center;
+}
+ul {
+   list-style-type: none;
+   display: flex;
+}
+li {
+   margin: 8px;
+}
+.logo-img {
+   width: 40px;
+}

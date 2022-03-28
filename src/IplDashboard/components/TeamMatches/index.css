@@ -1,0 +1,22 @@
+.team-detailed_view {
+   padding: 10px;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   width: 800px;
+   background-image: linear-gradient(to bottom, red, green);
+   overflow: auto;
+   padding: 20px;
+}
+.all-matches {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+.center {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
