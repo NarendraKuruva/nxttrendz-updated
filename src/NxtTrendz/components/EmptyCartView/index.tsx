@@ -1,23 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {
-   EmptyContainer,
-   StyledButton,
-   StyledMainHeading
-} from '../styledComponents'
+   EmptyCartContainer,
+   EmptyCartMainHeading,
+   ShopNowBtn
+} from './styledComponent'
 
+const emptyCartHeadingText = 'Your Cart Is Empty'
+const shopNowBtnText = 'Shop Now'
+const emptyCartImgLink =
+   'https://assets.ccbp.in/frontend/react-js/nxt-trendz-empty-cart-img.png'
+const emptyCartImgAltText = 'cart empty'
 const EmptyCartView = (): JSX.Element => (
-   <EmptyContainer>
-      <img
-         src='https://assets.ccbp.in/frontend/react-js/nxt-trendz-empty-cart-img.png'
-         alt='cart empty'
-      />
-      <StyledMainHeading>Your Cart Is Empty</StyledMainHeading>
+   <EmptyCartContainer>
+      <img src={emptyCartImgLink} alt={emptyCartImgAltText} />
+      <EmptyCartMainHeading>{emptyCartHeadingText}</EmptyCartMainHeading>
 
       <Link to='/nxttrendz/products'>
-         <StyledButton type='button'>Shop Now</StyledButton>
+         <ShopNowBtn type='button'>{shopNowBtnText}</ShopNowBtn>
       </Link>
-   </EmptyContainer>
+   </EmptyCartContainer>
 )
 
 export default EmptyCartView

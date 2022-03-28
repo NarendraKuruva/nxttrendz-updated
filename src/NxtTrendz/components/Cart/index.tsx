@@ -3,20 +3,29 @@ import { inject, observer } from 'mobx-react'
 import Header from '../Header'
 import CartListView from '../CartListView'
 import EmptyCartView from '../EmptyCartView'
-import {
-   FlexCenterContainer,
-   HeadingAndRemoveAllContainer,
-   HomeContainer,
-   OutlineBtn,
-   StyledMainHeading
-} from '../styledComponents'
 import CartSummery from '../CartSummery'
-import stores from '../../../Common/stores'
+import {
+   EmptyCartMainContainer,
+   HeadingAndRemoveAllMainContainer,
+   FlexCenterContainer,
+   HomeContainer,
+   HeadingAndRemoveAllContainer,
+   StyledMainHeading,
+   OutlineBtn
+} from './styledComponents'
+import NxtTrendzStore from '../../stores/NxtTrendzStore'
+
+const myCartHeadingText = 'My Cart'
+const removeAllBtnText = 'Remove All'
+
+interface CartProps {
+   nxtTrendzStore: NxtTrendzStore
+}
 
 const Cart = inject('nxtTrendzStore')(
    observer(
-      (): JSX.Element => {
-         const { nxtTrendzStore } = stores
+      (props: CartProps): JSX.Element => {
+         const { nxtTrendzStore } = props
          const { cartList } = nxtTrendzStore
          const showEmptyView = cartList.length === 0
 
@@ -24,26 +33,28 @@ const Cart = inject('nxtTrendzStore')(
             <FlexCenterContainer>
                <HomeContainer>
                   <Header />
-                  <div>
+                  <EmptyCartMainContainer>
                      {showEmptyView ? (
                         <EmptyCartView />
                      ) : (
-                        <div>
+                        <HeadingAndRemoveAllMainContainer>
                            <HeadingAndRemoveAllContainer>
-                              <StyledMainHeading>My Cart</StyledMainHeading>
+                              <StyledMainHeading>
+                                 {myCartHeadingText}
+                              </StyledMainHeading>
                               <OutlineBtn
                                  onClick={
                                     nxtTrendzStore.removeAllCartItemsFromCart
                                  }
                               >
-                                 Remove All
+                                 {removeAllBtnText}
                               </OutlineBtn>
                            </HeadingAndRemoveAllContainer>
-                           <CartListView />
+                           <CartListView nxtTrendzStore={nxtTrendzStore} />
                            <CartSummery />
-                        </div>
+                        </HeadingAndRemoveAllMainContainer>
                      )}
-                  </div>
+                  </EmptyCartMainContainer>
                </HomeContainer>
             </FlexCenterContainer>
          )

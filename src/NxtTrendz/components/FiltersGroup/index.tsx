@@ -1,23 +1,24 @@
 import React from 'react'
 import { BsSearch } from 'react-icons/bs'
 import {
+   CategoryHeading,
+   CategoryItem,
    CategoryItemsContainer,
    CategoryItemsMainContainer,
+   CategoryItemText,
    CategoryOptionsContainer,
+   ClearFiltersBtn,
    FiltersContainer,
-   HeadingTwo,
-   OutlineBtn,
+   FilterSearchContainer,
+   FilterSearchInput,
    RatingFilterItemCont,
+   RatingHeading,
    RatingItemsCont,
    RatingListContainer,
    RatingsMainContainer,
    RatingStarImgContainer,
-   SearchContainer,
-   StlyedRatingStarsImg,
-   StyledInput,
-   StyledListItem,
-   StyledParagraph
-} from '../styledComponents'
+   StlyedRatingStarsImg
+} from './styledComponents'
 interface CategoryOptionType {
    name: string
    categoryId: string
@@ -40,6 +41,11 @@ interface FiltersGroupProps {
    changeRating: (activeRatingId: string) => void
    clearFilters: () => void
 }
+
+const ratingHeadingText = 'Rating'
+const andUpText = '& up'
+const categoryHeadingText = 'Category'
+const clearFiltersBtnText = 'Clear Filters'
 
 const FiltersGroup = (props: FiltersGroupProps): JSX.Element => {
    const {
@@ -72,7 +78,7 @@ const FiltersGroup = (props: FiltersGroupProps): JSX.Element => {
                   alt={`rating ${rating.ratingId}`}
                />
             </RatingStarImgContainer>
-            <p>& up</p>
+            <p>{andUpText}</p>
          </RatingFilterItemCont>
       )
    }
@@ -84,24 +90,25 @@ const FiltersGroup = (props: FiltersGroupProps): JSX.Element => {
    )
    const renderRatingsFilters = (): JSX.Element => (
       <RatingsMainContainer>
-         <HeadingTwo>Rating</HeadingTwo>
+         <RatingHeading>{ratingHeadingText}</RatingHeading>
          <RatingItemsCont>{renderRatingsFiltersList()}</RatingItemsCont>
       </RatingsMainContainer>
    )
 
    const renderCategoryItem = (category: CategoryOptionType): JSX.Element => {
       const isActive = activeCategoryId === category.categoryId
+      const { name, categoryId } = category
       const onClickCategoryItem = (): void => {
-         changeCategory(category.categoryId)
+         changeCategory(categoryId)
       }
       return (
-         <StyledListItem
-            key={category.categoryId}
+         <CategoryItem
+            key={categoryId}
             onClick={onClickCategoryItem}
             activeStatus={isActive}
          >
-            <StyledParagraph ml={0}>{category.name}</StyledParagraph>
-         </StyledListItem>
+            <CategoryItemText>{name}</CategoryItemText>
+         </CategoryItem>
       )
    }
 
@@ -116,12 +123,13 @@ const FiltersGroup = (props: FiltersGroupProps): JSX.Element => {
 
    const renderProductCategories = (): JSX.Element => (
       <CategoryItemsMainContainer>
-         <HeadingTwo>Category</HeadingTwo>
+         <CategoryHeading>{categoryHeadingText}</CategoryHeading>
          <CategoryItemsContainer>
             {renderCategoriesList()}
          </CategoryItemsContainer>
       </CategoryItemsMainContainer>
    )
+
    const onEnterSearchInput = (
       event: React.KeyboardEvent<HTMLInputElement>
    ): void => {
@@ -129,14 +137,16 @@ const FiltersGroup = (props: FiltersGroupProps): JSX.Element => {
          enterSearchInput()
       }
    }
+
    const onChangeSearchInput = (
       event: React.ChangeEvent<HTMLInputElement>
    ): void => {
       changeSearchInput(event.target.value)
    }
+
    const renderSearchInput = (): JSX.Element => (
-      <SearchContainer>
-         <StyledInput
+      <FilterSearchContainer>
+         <FilterSearchInput
             value={searchInput}
             type='search'
             placeholder='Search'
@@ -144,16 +154,17 @@ const FiltersGroup = (props: FiltersGroupProps): JSX.Element => {
             onKeyDown={onEnterSearchInput}
          />
          <BsSearch />
-      </SearchContainer>
+      </FilterSearchContainer>
    )
+
    return (
       <FiltersContainer>
          {renderSearchInput()}
          {renderProductCategories()}
          {renderRatingsFilters()}
-         <OutlineBtn type='button' onClick={clearFilters}>
-            Clear Filters
-         </OutlineBtn>
+         <ClearFiltersBtn type='button' onClick={clearFilters}>
+            {clearFiltersBtnText}
+         </ClearFiltersBtn>
       </FiltersContainer>
    )
 }

@@ -213,20 +213,6 @@ export const IncreaseDecreaseBtn = styled.button`
 
 export const AddToCartBtnContainer = styled.div``
 
-export const RatingItemsCont = styled.ul`
-   display: flex;
-   flex-direction: column;
-`
-export const RatingListContainer = styled.div``
-
-export const RatingsMainContainer = styled.div``
-
-export const StlyedRatingStarsImg = styled.img`
-   width: 120px;
-`
-
-export const RatingStarImgContainer = styled.div``
-
 export const SearchContainer = styled.div`
    display: flex;
    align-items: center;
@@ -249,11 +235,6 @@ export const StyledListItem = styled.li`
    margin: 0px;
    cursor: pointer;
 `
-export const RatingFilterItemCont = styled(StyledListItem)`
-   display: flex;
-   align-items: center;
-   color: ${props => (props.activeStatus === true ? '#0967d2' : '#64748b')};
-`
 export const ProductsAndFilterContainer = styled.div`
    display: flex;
    height: 100vh;
@@ -263,22 +244,11 @@ export const ProductsAndFilterContainer = styled.div`
 `
 export const AllProductsMainContainer = styled.div``
 
-export const CategoryItemsContainer = styled(RatingItemsCont)``
-
-export const CategoryOptionsContainer = styled.div``
-
-export const CategoryItemsMainContainer = styled.div``
 export const ProductsContainer = styled.div`
    overflow: auto;
    @media (max-width: 768px) {
       padding: 20px;
    }
-`
-export const FiltersContainer = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   padding: 15px;
 `
 
 export const OutlineBtn = styled.button`
@@ -326,118 +296,6 @@ export const AllProductsNoProductsFoundContainer = styled.div`
    justify-content: center;
    align-items: center;
 `
-export const StyledCartItem = styled.li`
-   display: flex;
-   align-items: center;
-   background-color: #ffffff;
-   padding: 16px;
-   margin-bottom: 16px;
-   box-shadow: 0px 4px 16px 0px #eaebed;
-   @media (max-width: 768px) {
-      margin-bottom: 32px;
-      padding-left: 36px;
-      padding-top: 24px;
-      padding-bottom: 24px;
-      padding-right: 48px;
-   }
-`
-export const CartProductImg = styled.img`
-   width: 96px;
-   height: 96px;
-   border-radius: 4px;
-`
-export const CartProductDetailsContainer = styled.div`
-   margin-left: 16px;
-`
-export const CartProductTitleBrandContainer = styled.div`
-   @media (max-width: 768px) {
-      width: 250px;
-   }
-`
-export const CartProductTitle = styled.p`
-   color: #171f46;
-   font-family: 'Roboto';
-   font-size: 12px;
-   font-weight: 500;
-   margin-top: 0;
-   margin-bottom: 0;
-
-   @media screen and (min-width: 768px) {
-      font-size: 16px;
-   }
-`
-export const CartProductBrand = styled.p`
-   color: #64748b;
-   font-family: 'Roboto';
-   font-size: 10px;
-
-   @media screen and (min-width: 768px) {
-      font-size: 12px;
-   }
-`
-export const CartQuantityContainer = styled.div`
-   display: flex;
-   align-items: center;
-`
-export const CartQualityControlBtn = styled.button`
-   padding: 0;
-`
-export const CartProductQuantity = styled.p`
-   color: #52606d;
-   font-family: 'Roboto';
-   font-size: 12px;
-   font-weight: 500;
-   margin: 8px;
-   line-height: 1.3;
-
-   @media screen and (min-width: 768px) {
-      font-size: 18px;
-      margin-left: 16px;
-      margin-right: 16px;
-   }
-`
-export const TotalProductPrice = styled.p`
-   color: #0b69ff;
-   font-family: 'Roboto';
-   font-size: 16px;
-   font-weight: 500;
-   margin-top: 0;
-   margin-bottom: 0;
-   min-width: 100px;
-`
-export const PriceRemoveContainer = styled.div`
-   display: flex;
-   align-items: center;
-`
-export const RemoveCartItemButton = styled.button`
-   background-color: transparent;
-   color: #334155;
-   font-family: 'Roboto';
-   font-size: 10px;
-   line-height: 16px;
-   border: none;
-   outline: none;
-   cursor: pointer;
-
-   @media screen and (min-width: 768px) {
-      display: none;
-   }
-`
-export const RemoveCartItemMobileBtn = styled(StyledButton)`
-   // background-color: transparent;
-   border: none;
-   outline: none;
-   cursor: pointer;
-   margin-left: 32px;
-
-   @media screen and (max-width: 767px) {
-      display: none;
-   }
-`
-export const CartItemsContainer = styled.ul`
-   display: flex;
-   flex-wrap: wrap;
-`
 export const HeadingAndRemoveAllContainer = styled.div`
    display: flex;
    justify-content: space-between;
@@ -459,16 +317,4 @@ export const CartItemsCountBadge = styled.span`
    @media screen and (min-width: 768px) {
       background-color: #e6f6ff;
    }
-`
-export const StyledCartSummery = styled.div`
-   box-shadow: 0px 4px 16px 0px #eaebed;
-   padding: 30px;
-   width: 300px;
-`
-export const CartSummeryContainer = styled.div`
-   display: flex;
-   justify-content: flex-end;
-`
-export const EmptyContainer = styled(CenterContainer)`
-   height: 80vh;
 `

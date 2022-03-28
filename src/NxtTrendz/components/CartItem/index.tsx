@@ -2,6 +2,8 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { BsPlusSquare, BsDashSquare } from 'react-icons/bs'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import CartItemModel from '../../stores/models/CartItemModel'
+import NxtTrendzStore from '../../stores/NxtTrendzStore'
 import {
    CartProductBrand,
    CartProductDetailsContainer,
@@ -16,62 +18,64 @@ import {
    RemoveCartItemButton,
    StyledCartItem,
    TotalProductPrice
-} from '../styledComponents'
-import stores from '../../../Common/stores'
+} from './styledComponent'
+
+interface CartItemProps {
+   cartItemDetails: CartItemModel
+   nxtTrendzStore: NxtTrendzStore
+}
 
 const CartItem = inject('nxtTrendzStore')(
    observer(
-      (props): JSX.Element => {
+      (props: CartItemProps): JSX.Element => {
          const { cartItemDetails } = props
-         const { nxtTrendzStore } = stores
-         const { id } = cartItemDetails
+         const { nxtTrendzStore } = props
+         const {
+            id,
+            imageUrl,
+            title,
+            brand,
+            ItemQuantity,
+            price,
+            quantity,
+            decreaseQuantity,
+            increaseQuantity
+         } = cartItemDetails
          const removeItemFromCart = () => {
             nxtTrendzStore.removeItem(id)
          }
-
+         const totalPriceText = `Rs ${parseInt(price) * quantity}/-`
+         const brandTextContent = `by ${brand}`
+         const removeBtnText = 'Remove'
          return (
             <StyledCartItem>
-               <CartProductImg
-                  src={cartItemDetails.imageUrl}
-                  alt={cartItemDetails.title}
-               />
+               <CartProductImg src={imageUrl} alt={title} />
                <CartProductDetailsContainer>
                   <CartProductTitleBrandContainer>
-                     <CartProductTitle>
-                        {cartItemDetails.title}
-                     </CartProductTitle>
-                     <CartProductBrand>
-                        by {cartItemDetails.brand}
-                     </CartProductBrand>
+                     <CartProductTitle>{title}</CartProductTitle>
+                     <CartProductBrand>{brandTextContent}</CartProductBrand>
                   </CartProductTitleBrandContainer>
                   <CartQuantityContainer>
                      <CartQualityControlBtn type='button'>
                         <BsDashSquare
                            color='#52606D'
                            size={12}
-                           onClick={cartItemDetails.decreaseQuantity}
+                           onClick={decreaseQuantity}
                         />
                      </CartQualityControlBtn>
-                     <CartProductQuantity>
-                        {cartItemDetails.ItemQuantity}
-                     </CartProductQuantity>
+                     <CartProductQuantity>{ItemQuantity}</CartProductQuantity>
                      <CartQualityControlBtn type='button'>
                         <BsPlusSquare
                            color='#52606D'
                            size={12}
-                           onClick={cartItemDetails.increaseQuantity}
+                           onClick={increaseQuantity}
                         />
                      </CartQualityControlBtn>
                   </CartQuantityContainer>
                   <PriceRemoveContainer>
-                     <TotalProductPrice>
-                        Rs{' '}
-                        {parseInt(cartItemDetails.price) *
-                           cartItemDetails.quantity}
-                        /-
-                     </TotalProductPrice>
+                     <TotalProductPrice>{totalPriceText}</TotalProductPrice>
                      <OutlineBtn type='button' onClick={removeItemFromCart}>
-                        Remove
+                        {removeBtnText}
                      </OutlineBtn>
                   </PriceRemoveContainer>
                </CartProductDetailsContainer>
