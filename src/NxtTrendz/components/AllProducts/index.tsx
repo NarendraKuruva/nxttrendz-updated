@@ -32,7 +32,6 @@ interface AllProductsProps {
    nxtTrendzStore: NxtTrendzStore
 }
 
-@inject('nxtTrendzStore')
 @observer
 class AllProductsSection extends Component<AllProductsProps> {
    componentDidMount(): void {

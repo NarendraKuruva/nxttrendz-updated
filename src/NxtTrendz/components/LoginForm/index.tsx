@@ -30,7 +30,6 @@ const usernameLabelText = 'USERNAME'
 const passwordLabelText = 'PASSWORD'
 const loginBtnText = 'Login'
 
-@inject('nxtTrendzStore')
 @observer
 class LoginForm extends Component<LoginFormProps> {
    onSubmitSuccess = (jwtToken: string): void => {

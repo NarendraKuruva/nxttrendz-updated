@@ -136,6 +136,7 @@ export const HorizontalLine = styled.hr``
 export const ProductDetailedImg = styled.img`
    width: 50%;
    border-radius: 20px;
+   margin-top: 10px;
    @media (max-width: 768px) {
       width: 100%;
    }

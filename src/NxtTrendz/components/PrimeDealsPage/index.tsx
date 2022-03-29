@@ -20,7 +20,6 @@ const primeDealsFailureImgUrl =
    'https://assets.ccbp.in/frontend/react-js/exclusive-deals-banner-img.png'
 const primeDealsFailureImgAltText = 'Register Prime'
 
-inject('nxtTrendzStore')
 @observer
 class PrimeDealsSection extends Component<PrimeDealsPropsTypes> {
    componentDidMount(): void {
