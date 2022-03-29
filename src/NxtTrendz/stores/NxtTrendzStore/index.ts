@@ -38,6 +38,7 @@ class NxtTrendzStore {
       this.username = ''
       this.password = ''
       this.showSubmitError = false
+      this.errorMsg = ''
       this.primeDeals = []
       this.productItemDetails = {
          id: '',

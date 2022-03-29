@@ -1,38 +1,39 @@
 import React, { Component } from 'react'
 import Loader from 'react-loader-spinner'
-import { observer } from 'mobx-react'
-import stores from '../../../Common/stores'
+import { inject, observer } from 'mobx-react'
 import ProductCard from '../ProductCard'
+import NxtTrendzStore from '../../stores/NxtTrendzStore'
 import {
-   AllProductsLoaderContainer,
+   PrimeDealsLoaderContainer,
    PrimeDealsFailureImg,
    PrimeDealsList,
    PrimeDealsMainContainer,
    StyledMainHeading
-} from '../styledComponents'
+} from './styledComponents'
 
-const apiStatusConstants = {
-   initial: 'INITIAL',
-   success: 'SUCCESS',
-   failure: 'FAILURE',
-   inProgress: 'IN_PROGRESS'
+interface PrimeDealsPropsTypes {
+   nxtTrendzStore: NxtTrendzStore
 }
 
+const primeDealsListHeadingText = 'Exclusive Prime Deals'
+const primeDealsFailureImgUrl =
+   'https://assets.ccbp.in/frontend/react-js/exclusive-deals-banner-img.png'
+const primeDealsFailureImgAltText = 'Register Prime'
+
+inject('nxtTrendzStore')
 @observer
-class PrimeDealsSection extends Component {
+class PrimeDealsSection extends Component<PrimeDealsPropsTypes> {
    componentDidMount(): void {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
       nxtTrendzStore.getPrimeDeals()
    }
 
    renderPrimeDealsList = (): JSX.Element => {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
       const { primeDeals } = nxtTrendzStore
       return (
          <PrimeDealsMainContainer>
-            <StyledMainHeading className='primedeals-list-heading'>
-               Exclusive Prime Deals
-            </StyledMainHeading>
+            <StyledMainHeading>{primeDealsListHeadingText}</StyledMainHeading>
             <PrimeDealsList>
                {primeDeals.map(product => (
                   <ProductCard productDetails={product} key={product.id} />
@@ -45,22 +46,22 @@ class PrimeDealsSection extends Component {
    renderPrimeDealsFailureView = (): JSX.Element => (
       <PrimeDealsMainContainer>
          <PrimeDealsFailureImg
-            src='https://assets.ccbp.in/frontend/react-js/exclusive-deals-banner-img.png'
-            alt='Register Prime'
+            src={primeDealsFailureImgUrl}
+            alt={primeDealsFailureImgAltText}
          />
       </PrimeDealsMainContainer>
    )
 
    renderLoadingView = (): JSX.Element => (
       <PrimeDealsMainContainer>
-         <AllProductsLoaderContainer className='products-loader-container'>
+         <PrimeDealsLoaderContainer>
             <Loader type='ThreeDots' color='#0b69ff' height={50} width={50} />
-         </AllProductsLoaderContainer>
+         </PrimeDealsLoaderContainer>
       </PrimeDealsMainContainer>
    )
 
    render(): JSX.Element {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
       const { primeDealsApiStatus } = nxtTrendzStore
       switch (primeDealsApiStatus) {
          case 200:

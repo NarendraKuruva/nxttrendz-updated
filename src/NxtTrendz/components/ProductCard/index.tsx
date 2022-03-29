@@ -1,15 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import {
-   HeadingTwo,
+   ProductBrand,
+   ProductCardTitle,
    ProductImg,
+   ProductRating,
    RatingAndCostContainer,
    RatingContainer,
-   StyledHeadingThree,
+   ProductPrice,
    StyledProductCard,
    StyledStarIcon,
    StyledStarIconContainer
-} from '../styledComponents'
+} from './styledComponents'
+
+const starIconImgUrl = 'https://assets.ccbp.in/frontend/react-js/star-img.png'
+const starIconImgAltText = 'star'
 
 interface ProductCardProps {
    productDetails: {
@@ -25,21 +31,22 @@ interface ProductCardProps {
 const ProductCard = (props: ProductCardProps): JSX.Element => {
    const { productDetails } = props
    const { title, brand, imageUrl, rating, price, id } = productDetails
-
+   const brandText = `by ${brand}`
+   const priceText = `Rs ${price}/-`
    return (
       <Link to={`/nxttrendz/products/${id}`}>
          <StyledProductCard>
             <ProductImg src={imageUrl} alt='product' />
-            <HeadingTwo>{title}</HeadingTwo>
-            <p>by {brand}</p>
+            <ProductCardTitle>{title}</ProductCardTitle>
+            <ProductBrand>{brandText}</ProductBrand>
             <RatingAndCostContainer>
-               <StyledHeadingThree>Rs {price}/-</StyledHeadingThree>
+               <ProductPrice>{priceText}</ProductPrice>
                <RatingContainer>
-                  <p>{rating}</p>
+                  <ProductRating>{rating}</ProductRating>
                   <StyledStarIconContainer>
                      <StyledStarIcon
-                        src='https://assets.ccbp.in/frontend/react-js/star-img.png'
-                        alt='star'
+                        src={starIconImgUrl}
+                        alt={starIconImgAltText}
                      />
                   </StyledStarIconContainer>
                </RatingContainer>

@@ -1,13 +1,14 @@
 import React from 'react'
-import { CenterContainer } from '../styledComponents'
+import {
+   notFoundImgUrl,
+   notFoundImgAltText
+} from '../../constants/nxttrendzAppConstants'
+import { NotFoundContainer } from './styledComponents'
 
 const NotFound = (): JSX.Element => (
-   <CenterContainer className='not-found-container'>
-      <img
-         src='https://assets.ccbp.in/frontend/react-js/not-found-blog-img.png'
-         alt='not-found'
-      />
-   </CenterContainer>
+   <NotFoundContainer>
+      <img src={notFoundImgUrl} alt={notFoundImgAltText} />
+   </NotFoundContainer>
 )
 
 export default NotFound

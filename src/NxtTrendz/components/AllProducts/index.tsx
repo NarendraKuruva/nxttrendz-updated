@@ -2,6 +2,12 @@ import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import Loader from 'react-loader-spinner'
 import ProductCard from '../ProductCard'
+import ProductsHeader from '../ProductsHeader'
+import FiltersGroup from '../FiltersGroup'
+import NxtTrendzStore from '../../stores/NxtTrendzStore'
+import { categoryOptions } from '../../constants/nxttrendzAppConstants'
+import { sortbyOptions } from '../../constants/nxttrendzAppConstants'
+import { ratingsList } from '../../constants/nxttrendzAppConstants'
 import {
    AllProductsLoaderContainer,
    AllProductsLoaderMainContainer,
@@ -14,19 +20,13 @@ import {
    ProductsList,
    StyledButton,
    StyledMainHeading
-} from '../styledComponents'
-import ProductsHeader from '../ProductsHeader'
-import FiltersGroup from '../FiltersGroup'
-import NxtTrendzStore from '../../stores/NxtTrendzStore'
-import { categoryOptions } from '../../constants/nxttrendzAppConstants'
-import { sortbyOptions } from '../../constants/nxttrendzAppConstants'
-import { ratingsList } from '../../constants/nxttrendzAppConstants'
+} from './styledComponents'
 
 const productNotFoundHeading = 'Products Not Found'
 const continueShoppingBtnText = 'Continue Shopping'
-const productDetailedImgLink =
+const productDetailedErrImgLink =
    'https://assets.ccbp.in/frontend/react-js/nxt-trendz-error-view-img.png'
-const productDetailedImgAltText = 'error view'
+const productDetailedErrImgAltText = 'error view'
 
 interface AllProductsProps {
    nxtTrendzStore: NxtTrendzStore
@@ -48,6 +48,7 @@ class AllProductsSection extends Component<AllProductsProps> {
                sortbyOptions={sortbyOptions}
                activeOptionId={nxtTrendzStore.activeOptionId}
             />
+            {}
             <ProductsList>
                {nxtTrendzStore.productsList.map(product => (
                   <ProductCard productDetails={product} key={product.id} />
@@ -97,8 +98,8 @@ class AllProductsSection extends Component<AllProductsProps> {
          <AllProductsNoProductsFoundContainer>
             <CenterContainer>
                <ProductDetailedImg
-                  src={productDetailedImgLink}
-                  alt={productDetailedImgAltText}
+                  src={productDetailedErrImgLink}
+                  alt={productDetailedErrImgAltText}
                />
                <StyledMainHeading>{productNotFoundHeading}</StyledMainHeading>
                <StyledButton onClick={nxtTrendzStore.onContinueShopping}>

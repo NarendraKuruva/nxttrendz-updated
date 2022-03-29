@@ -54,3 +54,13 @@ export const ratingsList = [
          'https://assets.ccbp.in/frontend/react-js/rating-one-star-img.png'
    }
 ]
+
+export const websiteLogoUrl =
+   'https://assets.ccbp.in/frontend/react-js/nxt-trendz-login-img.png'
+
+export const websiteLogoAltText = 'website login'
+
+export const notFoundImgUrl =
+   'https://assets.ccbp.in/frontend/react-js/not-found-blog-img.png'
+
+export const notFoundImgAltText = 'not-found'

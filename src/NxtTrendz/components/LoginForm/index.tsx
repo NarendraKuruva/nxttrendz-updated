@@ -1,24 +1,36 @@
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 //eslint-disable-next-line  import/named
 import { History } from 'history'
 import Cookies from 'js-cookie'
 import { Redirect } from 'react-router-dom'
+import stores from '../../../Common/stores'
+import NxtTrendzStore from '../../stores/NxtTrendzStore'
+import {
+   websiteLogoUrl,
+   websiteLogoAltText
+} from '../../constants/nxttrendzAppConstants'
 import {
    FlexColumnContainer,
+   LogInButton,
    LoginFormContainer,
    LoginFormMainContainer,
    LoginFormWebsiteLogo,
    LoginInput,
    LoginMainImg,
-   LogoutButton
-} from '../styledComponents'
-import stores from '../../../Common/stores'
+   LoginPageContainer
+} from './styledComponents'
 
 interface LoginFormProps {
    history: History
+   nxtTrendzStore: NxtTrendzStore
 }
 
+const usernameLabelText = 'USERNAME'
+const passwordLabelText = 'PASSWORD'
+const loginBtnText = 'Login'
+
+@inject('nxtTrendzStore')
 @observer
 class LoginForm extends Component<LoginFormProps> {
    onSubmitSuccess = (jwtToken: string): void => {
@@ -29,18 +41,18 @@ class LoginForm extends Component<LoginFormProps> {
    submitForm = async (
       event: React.FormEvent<HTMLInputElement>
    ): Promise<void> => {
-      const { nxtTrendzStore } = stores
-      event.preventDefault()
-
+      const { nxtTrendzStore } = this.props
+      const { username, password } = nxtTrendzStore
       const userDetails = {
-         username: nxtTrendzStore.username,
-         password: nxtTrendzStore.password
+         username: username,
+         password: password
       }
       const url = 'https://apis.ccbp.in/login'
       const options = {
          method: 'POST',
          body: JSON.stringify(userDetails)
       }
+      event.preventDefault()
       const response = await fetch(url, options)
       const data = await response.json()
       if (response.ok === true) {
@@ -51,74 +63,80 @@ class LoginForm extends Component<LoginFormProps> {
    }
 
    renderPasswordField = (): JSX.Element => {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
+      const { onChangePassword } = nxtTrendzStore
       return (
          <>
-            <label htmlFor='password'>PASSWORD</label>
+            <label htmlFor='password'>{passwordLabelText}</label>
             <LoginInput
                type='password'
                id='password'
                className='input-element'
                value={nxtTrendzStore.password}
-               onChange={nxtTrendzStore.onChangePassword}
+               onChange={onChangePassword}
             />
          </>
       )
    }
 
    renderUsernameField = (): JSX.Element => {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
+      const { onChangeUsername } = nxtTrendzStore
       return (
          <>
-            <label htmlFor='username'>USERNAME</label>
+            <label htmlFor='username'>{usernameLabelText}</label>
             <LoginInput
                type='text'
                id='username'
                className='input-element'
                value={nxtTrendzStore.username}
-               onChange={nxtTrendzStore.onChangeUsername}
+               onChange={onChangeUsername}
             />
          </>
       )
    }
 
    render(): JSX.Element {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
       const token = Cookies.get('jwt_token')
+      console.log('N')
+      console.log(nxtTrendzStore)
+
       const { showSubmitError, errorMsg } = nxtTrendzStore
+      console.log(showSubmitError)
       if (token !== undefined) {
          return <Redirect to='/nxttrendz/' />
       }
       return (
-         <LoginFormMainContainer>
-            <LoginMainImg
-               src='https://assets.ccbp.in/frontend/react-js/nxt-trendz-login-img.png'
-               alt='website login'
-            />
-            <LoginFormContainer>
-               <LoginFormWebsiteLogo
-                  src='https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png'
-                  className='form-image'
-                  alt='website logo'
-               />
-               <FlexColumnContainer>
-                  {this.renderUsernameField()}
-               </FlexColumnContainer>
-               <FlexColumnContainer>
-                  {this.renderPasswordField()}
-               </FlexColumnContainer>
+         <LoginPageContainer>
+            <LoginFormMainContainer>
+               <LoginMainImg src={websiteLogoUrl} alt={websiteLogoAltText} />
+               <LoginFormContainer>
+                  <LoginFormWebsiteLogo
+                     src='https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png'
+                     alt='website logo'
+                  />
+                  <FlexColumnContainer>
+                     {this.renderUsernameField()}
+                  </FlexColumnContainer>
+                  <FlexColumnContainer>
+                     {this.renderPasswordField()}
+                  </FlexColumnContainer>
 
-               <LogoutButton
-                  type='submit'
-                  className='login-button'
-                  onClick={this.submitForm}
-               >
-                  Login
-               </LogoutButton>
+                  <LogInButton
+                     type='submit'
+                     className='login-button'
+                     onClick={this.submitForm}
+                  >
+                     {loginBtnText}
+                  </LogInButton>
 
-               {showSubmitError && <p className='error-message'>*{errorMsg}</p>}
-            </LoginFormContainer>
-         </LoginFormMainContainer>
+                  {showSubmitError && (
+                     <p className='error-message'>*{errorMsg}</p>
+                  )}
+               </LoginFormContainer>
+            </LoginFormMainContainer>
+         </LoginPageContainer>
       )
    }
 }

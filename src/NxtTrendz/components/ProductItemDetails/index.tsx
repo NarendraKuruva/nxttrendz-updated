@@ -6,46 +6,58 @@ import Loader from 'react-loader-spinner'
 //eslint-disable-next-line  import/named
 import { match } from 'react-router-dom'
 //eslint-disable-next-line  import/named
+import Header from '../Header'
+import ProductCard from '../ProductCard'
+import NxtTrendzStore from '../../stores/NxtTrendzStore'
 import {
+   AddToCartBtnContainer,
+   AddToCartButton,
    CenterContainer,
-   FlexRowContainer,
+   ContinueShoppingButton,
+   CounterContainer,
    HeadingTwo,
+   HorizontalLine,
+   IncreaseDecreaseBtn,
+   ProductAvailability,
+   ProductBrand,
+   ProductDescription,
    ProductDetailedImg,
-   FlexCenterContainer,
    ProductDetailedViewMainContainer,
+   ProductItemCenterContainer,
+   ProductItemContentContainer,
+   ProductItemLoaderContainer,
+   ProductRating,
    RatingAndCostContainer,
    RatingContainer,
+   SimilarProductsMainContainer,
    StyledMainHeading,
    StyledParagraph,
    StyledProductItemDetails,
    StyledSpanElement,
    StyledStarIcon,
-   CounterContainer,
-   IncreaseDecreaseBtn,
-   LogoutButton,
    StyledStarIconContainer,
-   AddToCartBtnContainer,
-   StyledButton
-} from '../styledComponents'
-import Header from '../Header'
-import ProductCard from '../ProductCard'
-import stores from '../../../Common/stores'
+   TotalReviews
+} from './styledComponents'
 
 interface ProductItemProps {
    match: match<Params>
    history: History
+   nxtTrendzStore: NxtTrendzStore
 }
 
 interface Params {
    id: string
 }
 
-const apiStatusConstants = {
-   initial: 'INITIAL',
-   success: 'SUCCESS',
-   failure: 'FAILURE',
-   inProgress: 'IN_PROGRESS'
-}
+const productNotFoundText = 'Product Not Found'
+const continueShoppingText = 'Continue Shopping'
+const productNotFoundImgUrl =
+   'https://assets.ccbp.in/frontend/react-js/nxt-trendz-error-view-img.png'
+const productNotFoundImgAltText = 'error view'
+const addToCartBtnText = 'ADD TO CART'
+const similarProductsHeadingText = 'Similar Products'
+const ratingStarImgUrl = 'https://assets.ccbp.in/frontend/react-js/star-img.png'
+const ratingStarImgAltText = 'star'
 
 @inject('nxtTrendzStore')
 @observer
@@ -57,13 +69,13 @@ class ProductItemDetails extends Component<ProductItemProps> {
       return id
    }
    componentDidMount(): void {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
       const id = this.getProductId()
       nxtTrendzStore.fetchProductDetails(id)
    }
 
    renderSuccessView = (): JSX.Element => {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
       const { productItemDetails, productQuantity } = nxtTrendzStore
       const {
          imageUrl,
@@ -80,42 +92,42 @@ class ProductItemDetails extends Component<ProductItemProps> {
       const addItemToCart = () => {
          addCartItem({ ...productItemDetails, quantity: productQuantity })
       }
+
+      const priceText = `Rs ${price}/-`
+      const totalReviewsText = `${totalReviews} Reviews`
+
       return (
-         <FlexCenterContainer>
+         <ProductItemCenterContainer>
             <ProductDetailedViewMainContainer>
                <Header />
-               <FlexRowContainer>
+               <ProductItemContentContainer>
                   <ProductDetailedImg src={imageUrl} />
                   <StyledProductItemDetails>
                      <StyledMainHeading>{title}</StyledMainHeading>
-                     <HeadingTwo>Rs {price}/-</HeadingTwo>
+                     <HeadingTwo>{priceText}</HeadingTwo>
                      <RatingAndCostContainer>
                         <RatingContainer>
-                           <p>{rating}</p>
+                           <ProductRating>{rating}</ProductRating>
                            <StyledStarIconContainer>
                               <StyledStarIcon
-                                 src='https://assets.ccbp.in/frontend/react-js/star-img.png'
-                                 alt='star'
+                                 src={ratingStarImgUrl}
+                                 alt={ratingStarImgAltText}
                               />
                            </StyledStarIconContainer>
                         </RatingContainer>
-                        <StyledParagraph ml={15}>
-                           {totalReviews} Reviews
-                        </StyledParagraph>
+                        <TotalReviews>{totalReviewsText}</TotalReviews>
                      </RatingAndCostContainer>
 
-                     <StyledParagraph color='#7e898d' size={20}>
-                        {description}
-                     </StyledParagraph>
-                     <StyledParagraph color='#7e898d'>
+                     <ProductDescription>{description}</ProductDescription>
+                     <ProductAvailability color='#7e898d'>
                         <StyledSpanElement>Available: </StyledSpanElement>
                         {availability}
-                     </StyledParagraph>
-                     <StyledParagraph color='#7e898d'>
+                     </ProductAvailability>
+                     <ProductBrand>
                         <StyledSpanElement>Brand: </StyledSpanElement>
                         {brand}
-                     </StyledParagraph>
-                     <hr />
+                     </ProductBrand>
+                     <HorizontalLine />
                      <CounterContainer>
                         <IncreaseDecreaseBtn
                            onClick={nxtTrendzStore.onDecreaseQuantity}
@@ -130,23 +142,25 @@ class ProductItemDetails extends Component<ProductItemProps> {
                         </IncreaseDecreaseBtn>
                      </CounterContainer>
                      <AddToCartBtnContainer>
-                        <LogoutButton onClick={addItemToCart}>
-                           ADD TO CART
-                        </LogoutButton>
+                        <AddToCartButton onClick={addItemToCart}>
+                           {addToCartBtnText}
+                        </AddToCartButton>
                      </AddToCartBtnContainer>
                   </StyledProductItemDetails>
-               </FlexRowContainer>
-               <StyledMainHeading>Similar Products</StyledMainHeading>
-               <FlexRowContainer>
+               </ProductItemContentContainer>
+               <StyledMainHeading>
+                  {similarProductsHeadingText}
+               </StyledMainHeading>
+               <SimilarProductsMainContainer>
                   {similarProducts.map(eachProduct => (
                      <ProductCard
                         productDetails={eachProduct}
                         key={eachProduct.id}
                      />
                   ))}
-               </FlexRowContainer>
+               </SimilarProductsMainContainer>
             </ProductDetailedViewMainContainer>
-         </FlexCenterContainer>
+         </ProductItemCenterContainer>
       )
    }
 
@@ -156,29 +170,29 @@ class ProductItemDetails extends Component<ProductItemProps> {
    }
 
    renderFailureView = (): JSX.Element => (
-      <FlexCenterContainer>
+      <ProductItemCenterContainer>
          <ProductDetailedViewMainContainer>
             <Header />
             <CenterContainer>
                <ProductDetailedImg
-                  src='https://assets.ccbp.in/frontend/react-js/nxt-trendz-error-view-img.png'
-                  alt='error view'
+                  src={productNotFoundImgUrl}
+                  alt={productNotFoundImgAltText}
                />
-               <StyledMainHeading>Product Not Found</StyledMainHeading>
-               <StyledButton onClick={this.onContinueShopping}>
-                  Continue Shopping
-               </StyledButton>
+               <StyledMainHeading>{productNotFoundText}</StyledMainHeading>
+               <ContinueShoppingButton onClick={this.onContinueShopping}>
+                  {continueShoppingText}
+               </ContinueShoppingButton>
             </CenterContainer>
          </ProductDetailedViewMainContainer>
-      </FlexCenterContainer>
+      </ProductItemCenterContainer>
    )
    renderLoadingView = (): JSX.Element => (
-      <CenterContainer className='products-loader-container'>
+      <ProductItemLoaderContainer>
          <Loader type='ThreeDots' color='#0b69ff' height={50} width={50} />
-      </CenterContainer>
+      </ProductItemLoaderContainer>
    )
    render(): JSX.Element {
-      const { nxtTrendzStore } = stores
+      const { nxtTrendzStore } = this.props
       const { productItemApiStatus } = nxtTrendzStore
 
       switch (productItemApiStatus) {

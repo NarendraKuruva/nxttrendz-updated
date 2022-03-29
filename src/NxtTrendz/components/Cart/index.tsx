@@ -4,6 +4,7 @@ import Header from '../Header'
 import CartListView from '../CartListView'
 import EmptyCartView from '../EmptyCartView'
 import CartSummery from '../CartSummery'
+import NxtTrendzStore from '../../stores/NxtTrendzStore'
 import {
    EmptyCartMainContainer,
    HeadingAndRemoveAllMainContainer,
@@ -13,7 +14,6 @@ import {
    StyledMainHeading,
    OutlineBtn
 } from './styledComponents'
-import NxtTrendzStore from '../../stores/NxtTrendzStore'
 
 const myCartHeadingText = 'My Cart'
 const removeAllBtnText = 'Remove All'
@@ -51,7 +51,7 @@ const Cart = inject('nxtTrendzStore')(
                               </OutlineBtn>
                            </HeadingAndRemoveAllContainer>
                            <CartListView nxtTrendzStore={nxtTrendzStore} />
-                           <CartSummery />
+                           <CartSummery nxtTrendzStore={nxtTrendzStore} />
                         </HeadingAndRemoveAllMainContainer>
                      )}
                   </EmptyCartMainContainer>

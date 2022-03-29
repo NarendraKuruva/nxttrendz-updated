@@ -1,29 +1,30 @@
 import React from 'react'
 import Header from '../Header'
+import AllProductsSection from '../AllProducts'
+import PrimeDealsSection from '../PrimeDealsPage'
+import stores from '../../../Common/stores'
 import {
-   FlexCenterContainer,
-   HomeContainer,
+   ProductsMainContainer,
+   ProductsHomeContainer,
    ProductsPageAllProductsCont,
    ProductsPageMainContainer,
    ProductsPagePrimeDealsCont
-} from '../styledComponents'
-import AllProductsSection from '../AllProducts'
-import PrimeDealsSection from '../PrimeDealsPage'
+} from './styledComponents'
 
 const Products = (): JSX.Element => (
-   <FlexCenterContainer>
-      <HomeContainer>
+   <ProductsMainContainer>
+      <ProductsHomeContainer>
          <Header />
          <ProductsPageMainContainer>
             <ProductsPagePrimeDealsCont>
-               {<PrimeDealsSection />}
+               {<PrimeDealsSection nxtTrendzStore={stores.nxtTrendzStore} />}
             </ProductsPagePrimeDealsCont>
             <ProductsPageAllProductsCont>
-               {<AllProductsSection />}
+               {<AllProductsSection nxtTrendzStore={stores.nxtTrendzStore} />}
             </ProductsPageAllProductsCont>
          </ProductsPageMainContainer>
-      </HomeContainer>
-   </FlexCenterContainer>
+      </ProductsHomeContainer>
+   </ProductsMainContainer>
 )
 
 export default Products
